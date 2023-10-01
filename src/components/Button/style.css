@@ -1,0 +1,124 @@
+.lyz-button {
+  --lyz-button-font-weight: var(--lyz-font-weight-primary);
+  --lyz-button-border-color: var(--lyz-border-color);
+  --lyz-button-bg-color: var(--lyz-fill-color-blank);
+  --lyz-button-text-color: var(--lyz-text-color-regular);
+  --lyz-button-disabled-text-color: var(--lyz-disabled-text-color);
+  --lyz-button-disabled-bg-color: var(--lyz-fill-color-blank);
+  --lyz-button-disabled-border-color: var(--lyz-border-color-light);
+  --lyz-button-hover-text-color: var(--lyz-color-primary);
+  --lyz-button-hover-bg-color: var(--lyz-color-primary-light-9);
+  --lyz-button-hover-border-color: var(--lyz-color-primary-light-7);
+  --lyz-button-active-text-color: var(--lyz-button-hover-text-color);
+  --lyz-button-active-border-color: var(--lyz-color-primary);
+  --lyz-button-active-bg-color: var(--lyz-button-hover-bg-color);
+  --lyz-button-outline-color: var(--lyz-color-primary-light-5);
+  --lyz-button-active-color: var(--lyz-text-color-primary);
+}
+.lyz-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--lyz-button-text-color);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.1s;
+  font-weight: var(--lyz-button-font-weight);
+  user-select: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: var(--lyz-button-bg-color);
+  border: var(--lyz-border);
+  border-color: var(--lyz-button-border-color);
+  padding: 8px 15px;
+  font-size: var(--lyz-font-size-base);
+  border-radius: var(--lyz-border-radius-base);
+  & + & {
+    margin-left: 12px;
+  }
+  &:hover,
+  &:focus {
+    color: var(--lyz-button-hover-text-color);
+    border-color: var(--lyz-button-hover-border-color);
+    background-color: var(--lyz-button-hover-bg-color);
+    outline: none;
+  }
+  &:active {
+    color: var(--lyz-button-active-text-color);
+    border-color: var(--lyz-button-active-border-color);
+    background-color: var(--lyz-button-active-bg-color);
+    outline: none;
+  }
+  &.is-plain {
+    --lyz-button-hover-text-color: var(--lyz-color-primary);
+    --lyz-button-hover-bg-color: var(--lyz-fill-color-blank);
+    --lyz-button-hover-border-color: var(--lyz-color-primary);
+  }
+  /*round*/
+  &.is-round {
+    border-radius: var(--lyz-border-radius-round);
+  }
+  /*circle*/
+  &.is-circle {
+    border-radius: 50%;
+    padding: 8px;
+  }
+  /*disabled*/
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus {
+    color: var(--lyz-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--lyz-button-disabled-bg-color);
+    border-color: var(--lyz-button-disabled-border-color);
+  }
+}
+@each $val in primary, success, warning, info, danger {
+  .lyz-button--$(val) {
+    --lyz-button-text-color: var(--lyz-color-white);
+    --lyz-button-bg-color: var(--lyz-color-$(val));
+    --lyz-button-border-color: var(--lyz-color-$(val));
+    --lyz-button-outline-color: var(--lyz-color-$(val)-light-5);
+    --lyz-button-active-color: var(--lyz-color-$(val)-dark-2);
+    --lyz-button-hover-text-color: var(--lyz-color-white);
+    --lyz-button-hover-bg-color: var(--lyz-color-$(val)-light-3);
+    --lyz-button-hover-border-color: var(--lyz-color-$(val)-light-3);
+    --lyz-button-active-bg-color: var(--lyz-color-$(val)-dark-2);
+    --lyz-button-active-border-color: var(--lyz-color-$(val)-dark-2);
+    --lyz-button-disabled-text-color: var(--lyz-color-white);
+    --lyz-button-disabled-bg-color: var(--lyz-color-$(val)-light-5);
+    --lyz-button-disabled-border-color: var(--lyz-color-$(val)-light-5);
+  }
+  .lyz-button--$(val).is-plain {
+    --lyz-button-text-color: var(--lyz-color-$(val));
+    --lyz-button-bg-color: var(--lyz-color-$(val)-light-9);
+    --lyz-button-border-color: var(--lyz-color-$(val)-light-5);
+    --lyz-button-hover-text-color: var(--lyz-color-white);
+    --lyz-button-hover-bg-color: var(--lyz-color-$(val));
+    --lyz-button-hover-border-color: var(--lyz-color-$(val));
+    --lyz-button-active-text-color: var(--lyz-color-white);
+  }
+}
+.lyz-button--large {
+  --lyz-button-size: 40px;
+  height: var(--lyz-button-size);
+  padding: 12px 19px;
+  font-size: var(--lyz-font-size-base);
+  border-radius: var(--lyz-border-radius-base);
+}
+.lyz-button--small {
+  --lyz-button-size: 24px;
+  height: var(--lyz-button-size);
+  padding: 5px 11px;
+  font-size: 12px;
+  border-radius: calc(var(--lyz-border-radius-base) - 1px);
+}
