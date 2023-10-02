@@ -22,8 +22,8 @@ defineExpose({
     ref="_ref"
     class="lyz-button"
     :class="{
-      [`lyz-button-${type}`]: type,
-      [`lyz-size-${size}`]: size,
+      [`lyz-button--${type}`]: type,
+      [`lyz-size--${size}`]: size,
       'is-plain': plain,
       'is-round': round,
       'is-circle': circle,

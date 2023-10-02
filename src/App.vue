@@ -14,7 +14,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <Button ref="buttonRef" type="primary" plain disabled>
+    <Button ref="buttonRef" type="danger" size="large">
       Test Button
     </Button>
 

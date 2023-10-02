@@ -3,6 +3,10 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
+  env: {
+    node: true,
+    browser: true
+  },
   extends: [
     'plugin:vue/vue3-recommended', // 使用 Vue3 的规则
     'eslint:recommended', // 使用 ESLint 推荐的规则
