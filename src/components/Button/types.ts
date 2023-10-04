@@ -13,6 +13,8 @@ export interface ButtonProps {
   disabled?: boolean
   nativeType?: NativeType
   autofocus?: boolean
+  loading?: boolean
+  icon?: string
 }
 
 export const buttonProps = {

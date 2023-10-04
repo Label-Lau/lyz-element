@@ -33,6 +33,12 @@
   }
   &.is-active {
     border-bottom-color: transparent;
+    .header-angle {
+      transform: rotate(90deg);
+    }
+  }
+  .header-angle {
+    transition: transform var(--lyz-transition-duration);
   }
 }
 .lyz-collapse-item__content {
@@ -45,6 +51,7 @@
   border-bottom: 1px solid var(--lyz-collapse-border-color);
   padding-bottom: 25px;
 }
-.slide-enter-active, .slide-leave-active {
-  transition: height .3s ease-in-out;
+.slide-enter-active,
+.slide-leave-active {
+  transition: height var(--lyz-transition-duration);
 }

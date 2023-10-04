@@ -65,4 +65,8 @@
   --lyz-disabled-bg-color: var(--lyz-fill-color-light);
   --lyz-disabled-text-color: var(--lyz-text-color-placeholder);
   --lyz-disabled-border-color: var(--lyz-border-color-light);
+
+    /*animation*/
+    --lyz-transition-duration: .3s;
+    --lyz-transition-duration-fast: .2s;
 }

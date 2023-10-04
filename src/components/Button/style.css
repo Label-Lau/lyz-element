@@ -81,6 +81,9 @@
     background-color: var(--lyz-button-disabled-bg-color);
     border-color: var(--lyz-button-disabled-border-color);
   }
+  [class*='lyz-icon'] + span {
+    margin-left: 6px;
+  }
 }
 @each $val in primary, success, warning, info, danger {
   .lyz-button--$(val) {

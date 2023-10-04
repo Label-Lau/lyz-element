@@ -12,6 +12,7 @@
       <slot name="title">
         {{ title }}
       </slot>
+      <Icon icon="angle-right" class="header-angle" />
     </div>
     <Transition name="slide" v-on="transitionEvents">
       <div v-show="isActive" class="lyz-collapse-item__wrapper">
@@ -27,6 +28,8 @@
 import { inject, computed } from 'vue'
 import type { CollapseItemProps } from './types'
 import { collapseContextKey } from './types'
+import Icon from '../Icon/Icon.vue'
+
 defineOptions({
   name: 'LyzCollapseItem'
 })
