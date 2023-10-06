@@ -1,29 +1,3 @@
-<template>
-  <div class="lyz-collapse-item" :class="{ 'is-disabled': disabled }">
-    <div
-      :id="`item-header-${name}`"
-      class="lyz-collapse-item__header"
-      :class="{
-        'is-disabled': disabled,
-        'is-active': isActive
-      }"
-      @click="handleClick"
-    >
-      <slot name="title">
-        {{ title }}
-      </slot>
-      <Icon icon="angle-right" class="header-angle" />
-    </div>
-    <Transition name="slide" v-on="transitionEvents">
-      <div v-show="isActive" class="lyz-collapse-item__wrapper">
-        <div :id="`item-content-${name}`" class="lyz-collapse-item__content">
-          <slot />
-        </div>
-      </div>
-    </Transition>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { inject, computed } from 'vue'
 import type { CollapseItemProps } from './types'
@@ -67,3 +41,29 @@ const transitionEvents: Record<string, (el: HTMLElement) => void> = {
   }
 }
 </script>
+
+<template>
+  <div class="lyz-collapse-item" :class="{ 'is-disabled': disabled }">
+    <div
+      :id="`item-header-${name}`"
+      class="lyz-collapse-item__header"
+      :class="{
+        'is-disabled': disabled,
+        'is-active': isActive
+      }"
+      @click="handleClick"
+    >
+      <slot name="title">
+        {{ title }}
+      </slot>
+      <Icon icon="angle-right" class="header-angle" />
+    </div>
+    <Transition name="slide" v-on="transitionEvents">
+      <div v-show="isActive" class="lyz-collapse-item__wrapper">
+        <div :id="`item-content-${name}`" class="lyz-collapse-item__content">
+          <slot />
+        </div>
+      </div>
+    </Transition>
+  </div>
+</template>

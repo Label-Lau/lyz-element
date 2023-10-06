@@ -1,9 +1,3 @@
-<template>
-  <i class="lyz-icon" v-bind="$attrs">
-    <font-awesome-icon v-bind="iconProps" :style="customStyles" />
-  </i>
-</template>
-
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { IconProps } from './types'
@@ -21,3 +15,9 @@ const customStyles = computed(() => {
   return props.color ? { color: props.color } : {}
 })
 </script>
+
+<template>
+  <i class="lyz-icon" v-bind="$attrs">
+    <font-awesome-icon v-bind="iconProps" :style="customStyles" />
+  </i>
+</template>
