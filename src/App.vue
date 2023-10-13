@@ -1,34 +1,52 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import type { Options } from '@popperjs/core'
 import Button from './components/Button/Button.vue'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem.vue'
 import Icon from './components/Icon/Icon.vue'
+import Tooltip from './components/Tooltip/Tooltip.vue'
 import type { ButtonInstance } from './components/Button/types'
+import type { TooltipInstance } from './components/Tooltip/types'
+const tooltipRef = ref<TooltipInstance | null>(null)
 const buttonRef = ref<ButtonInstance | null>(null)
 const size = ref<any>('3x')
+const trigger = ref<any>('hover')
 const openedValue = ref(['a'])
+const options: Partial<Options> = {}
+const open = () => {
+  tooltipRef.value?.show()
+}
+const close = () => {
+  tooltipRef.value?.hide()
+}
 onMounted(() => {
   if (buttonRef.value) {
     console.log('buttonRef', buttonRef.value.ref)
   }
-  // setTimeout(() => {
-  //   openedValue.value = ['a', 'b']
-  //   size.value = '2xl'
-  // }, 2000)
+  setTimeout(() => {
+    // openedValue.value = ['a', 'b']
+    // size.value = '2xl'
+    trigger.value = 'click'
+  }, 2000)
 })
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125">
+    <Tooltip ref="tooltipRef" placement="right" :trigger="trigger" :popper-options="options">
+      <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125">
+      <template #content>
+        <h1>Hello tooltip</h1>
+      </template>
+    </Tooltip>
   </header>
   <Icon icon="arrow-up" :size="size" type="danger" color="#0e7a0d" />
   <main>
-    <Button ref="buttonRef">
+    <Button ref="buttonRef" @click="open">
       Test Button
     </Button>
-    <Button plain>
+    <Button plain @click="close">
       Plain Button
     </Button>
     <Button round>
@@ -81,7 +99,7 @@ onMounted(() => {
     </Button>
     <Button size="large" icon="arrow-up">
       Icon
-    </Button><br><br>    
+    </Button><br><br>
 
     <Collapse v-model="openedValue" accordion>
       <Item name="a">
@@ -119,7 +137,11 @@ header {
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    /* margin: 0 2rem 0 0; */
+    border: 1px solid green;
+  }
+  :deep(.lyz-tooltip__popper) {
+    border: 1px solid red;
   }
 
   header .wrapper {
