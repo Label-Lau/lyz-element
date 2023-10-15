@@ -27,17 +27,24 @@ onMounted(() => {
   setTimeout(() => {
     // openedValue.value = ['a', 'b']
     // size.value = '2xl'
-    trigger.value = 'click'
+    // trigger.value = 'click'
   }, 2000)
 })
 </script>
 
 <template>
   <header>
-    <Tooltip ref="tooltipRef" placement="right" :trigger="trigger" :popper-options="options">
+    <Tooltip
+      ref="tooltipRef"
+      placement="right"
+      :trigger="trigger"
+      :popper-options="options"
+      :open-delay="300"
+      :close-delay="300"
+    >
       <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125">
       <template #content>
-        <h1>Hello tooltip</h1>
+        <div>Hello tooltip</div>
       </template>
     </Tooltip>
   </header>
@@ -139,9 +146,6 @@ header {
   .logo {
     /* margin: 0 2rem 0 0; */
     border: 1px solid green;
-  }
-  :deep(.lyz-tooltip__popper) {
-    border: 1px solid red;
   }
 
   header .wrapper {
