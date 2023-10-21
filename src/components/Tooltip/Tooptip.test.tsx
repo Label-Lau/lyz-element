@@ -12,7 +12,7 @@ describe('Tooltip.vue', () => {
       () => (
         <div>
           <div id="outside"></div>
-
+          {/* @ts-ignore */}
           <Tooltip content="hello tooltip" trigger="click" onVisibleChange={onVisibleChange}>
             <button id="trigger">Trigger</button>
           </Tooltip>

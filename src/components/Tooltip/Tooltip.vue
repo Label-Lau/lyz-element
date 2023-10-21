@@ -6,6 +6,9 @@ import { debounce } from 'lodash-es'
 import type { TooltipProps, TooltipEmits, TooltipInstance } from './types'
 import useClickOutside from '../../hooks/useClickOutside'
 
+defineOptions({
+  name: 'LyzTooltip'
+})
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'bottom',
   trigger: 'hover',
@@ -22,7 +25,6 @@ const popperContainerNode = ref<HTMLElement>()
 let popperInstance: null | Instance = null
 let events: Record<string, any> = {}
 let outerEvents: Record<string, any> = {}
-let contentEvents: Record<string, any> = {}
 const popperOptions = computed(() => {
   return {
     placement: props.placement,
@@ -56,7 +58,6 @@ const openFinal = () => {
 }
 
 const closeFinal = () => {
-  console.log('🚀 ~ file: Tooltip.vue:58 ~ closeFinal ~ closeFinal:', 'closeFinal')
   openDebounce.cancel()
   closeDebounce()
 }
@@ -77,7 +78,6 @@ useClickOutside(popperContainerNode, () => {
 const attachEvents = () => {
   if (props.trigger === 'hover') {
     events['mouseenter'] = openFinal
-    contentEvents['mouseenter'] = openFinal
     outerEvents['mouseleave'] = closeFinal
   } else if (props.trigger === 'click') {
     events['click'] = togglePopper
@@ -94,7 +94,6 @@ watch(
     if (isManual) {
       events = {}
       outerEvents = {}
-      contentEvents = {}
     } else {
       attachEvents()
     }
