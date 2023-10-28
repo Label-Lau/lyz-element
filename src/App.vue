@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, h } from 'vue'
-import type { Options } from '@popperjs/core'
+// import type { Options } from '@popperjs/core'
 import Button from './components/Button/Button.vue'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem.vue'
@@ -35,9 +35,10 @@ const inlineConsole = (...args: any) => {
   console.log(...args)
 }
 onMounted(() => {
-  createMessage({ message: 'hello world', duration: 0 })
+  const instance = createMessage({ message: 'hello world' })
   createMessage({ message: 'hello world again', duration: 0 })
   createMessage({ message: 'hello world three', duration: 0 })
+  // createMessage({ message: 'hello world three', duration: 0 })
   if (buttonRef.value) {
     console.log('buttonRef', buttonRef.value.ref)
   }
@@ -45,6 +46,7 @@ onMounted(() => {
     // openedValue.value = ['a', 'b']
     // size.value = '2xl'
     // trigger.value = 'click'
+    // instance.destroy()
   }, 2000)
 })
 </script>

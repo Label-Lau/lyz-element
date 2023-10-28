@@ -1,0 +1,58 @@
+.lyz-message {
+  --lyz-message-bg-color: var(--lyz-color-info-light-9);
+  --lyz-message-border-color: var(--lyz-border-color-lighter);
+  --lyz-message-padding: 15px 19px;
+  --lyz-message-close-size: 16px;
+  --lyz-message-close-icon-color: var(--lyz-text-color-placeholder);
+  --lyz-message-close-hover-color: var(--lyz-text-color-secondary);
+}
+.lyz-message {
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  border-radius: var(--lyz-border-radius-base);
+  border-width: var(--lyz-border-width);
+  border-style: var(--lyz-border-style);
+  border-color: var(--lyz-message-border-color);
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  background-color: var(--lyz-message-bg-color);
+  padding: var(--lyz-message-padding);
+  display: flex;
+  align-items: center;
+  transition:
+    top var(--lyz-transition-duration),
+    opacity var(--lyz-transition-duration),
+    transform var(--lyz-transition-duration);
+  .lyz-message__content {
+    color: var(--lyz-message-text-color);
+    overflow-wrap: anywhere;
+  }
+  &.is-close .lyz-message__content {
+    padding-right: 30px;
+  }
+  .lyz-message__close {
+    display: flex;
+    align-items: center;
+  }
+  .lyz-message__close svg {
+    cursor: pointer;
+  }
+}
+@each $val in info, success, warning, danger {
+  .lyz-message--$(val) {
+    --lyz-message-bg-color: var(--lyz-color-$(val)-light-9);
+    --lyz-message-border-color: var(--lyz-color-$(val)-light-8);
+    --lyz-message-text-color: var(--lyz-color-$(val));
+    .lyz-message__close {
+      --lyz-icon-color: var(--lyz-color-$(val));
+    }
+  }
+}
+.lyz-message.fade-up-enter-from,
+.lyz-message.fade-up-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}
