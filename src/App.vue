@@ -7,6 +7,7 @@ import Item from './components/Collapse/CollapseItem.vue'
 import Icon from './components/Icon/Icon.vue'
 import Tooltip from './components/Tooltip/Tooltip.vue'
 import Dropdown from './components/Dropdown/Dropdown.vue'
+import { createMessage } from './components/Message/method'
 import type { MenuOption } from './components/Dropdown/types'
 import type { ButtonInstance } from './components/Button/types'
 import type { TooltipInstance } from './components/Tooltip/types'
@@ -34,6 +35,9 @@ const inlineConsole = (...args: any) => {
   console.log(...args)
 }
 onMounted(() => {
+  createMessage({ message: 'hello world', duration: 0 })
+  createMessage({ message: 'hello world again', duration: 0 })
+  createMessage({ message: 'hello world three', duration: 0 })
   if (buttonRef.value) {
     console.log('buttonRef', buttonRef.value.ref)
   }
