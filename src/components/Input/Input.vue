@@ -52,7 +52,7 @@
             icon="circle-xmark"
             class="lyz-input__clear"
             @click="clear"
-            @mousedown.prevent="NOOP"
+            @mousedown.prevent="() => {}"
           />
           <Icon
             v-if="showPasswordArea && passwordVisible"
@@ -101,12 +101,13 @@ import type { InputProps, InputEmits } from './types'
 import Icon from '../Icon/Icon.vue'
 
 defineOptions({
-  name: 'VkInput',
+  name: 'LyzInput',
   inheritAttrs: false
 })
 const props = withDefaults(defineProps<InputProps>(), { type: 'text', autocomplete: 'off' })
 const emits = defineEmits<InputEmits>()
 const attrs = useAttrs()
+
 const innerValue = ref(props.modelValue)
 const isFocus = ref(false)
 const passwordVisible = ref(false)
@@ -119,7 +120,6 @@ const showPasswordArea = computed(() => props.showPassword && !props.disabled &&
 const togglePasswordVisible = () => {
   passwordVisible.value = !passwordVisible.value
 }
-const NOOP = () => {}
 const keepFocus = async () => {
   await nextTick()
   inputRef.value.focus()
@@ -136,12 +136,10 @@ const handleFocus = (event: FocusEvent) => {
   emits('focus', event)
 }
 const handleBlur = (event: FocusEvent) => {
-  console.log('blur triggered')
   isFocus.value = false
   emits('blur', event)
 }
 const clear = () => {
-  console.log('clear triggered')
   innerValue.value = ''
   emits('update:modelValue', '')
   emits('clear')
