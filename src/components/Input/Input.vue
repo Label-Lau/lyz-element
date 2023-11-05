@@ -1,9 +1,9 @@
 <template>
   <div
-    class="vk-input"
+    class="lyz-input"
     :class="{
-      [`vk-input--${type}`]: type,
-      [`vk-input--${size}`]: size,
+      [`lyz-input--${type}`]: type,
+      [`lyz-input--${size}`]: size,
       'is-disabled': disabled,
       'is-prepend': $slots.prepend,
       'is-append': $slots.append,
@@ -15,19 +15,19 @@
     <!-- input -->
     <template v-if="type !== 'textarea'">
       <!-- prepend slot -->
-      <div v-if="$slots.prepend" class="vk-input__prepend">
+      <div v-if="$slots.prepend" class="lyz-input__prepend">
         <slot name="prepend" />
       </div>
-      <div class="vk-input__wrapper">
+      <div class="lyz-input__wrapper">
         <!-- prefix slot -->
-        <span v-if="$slots.prefix" class="vk-input__prefix">
+        <span v-if="$slots.prefix" class="lyz-input__prefix">
           <slot name="prefix" />
         </span>
         <input
           ref="inputRef"
           v-bind="attrs"
           v-model="innerValue"
-          class="vk-input__inner"
+          class="lyz-input__inner"
           :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
           :disabled="disabled"
           :readonly="readonly"
@@ -43,33 +43,33 @@
         <!-- suffix slot -->
         <span
           v-if="$slots.suffix || showClear || showPasswordArea"
-          class="vk-input__suffix"
+          class="lyz-input__suffix"
           @click="keepFocus"
         >
           <slot name="suffix" />
           <Icon
             v-if="showClear"
             icon="circle-xmark"
-            class="vk-input__clear"
+            class="lyz-input__clear"
             @click="clear"
             @mousedown.prevent="NOOP"
           />
           <Icon
             v-if="showPasswordArea && passwordVisible"
             icon="eye"
-            class="vk-input__password"
+            class="lyz-input__password"
             @click="togglePasswordVisible"
           />
           <Icon
             v-if="showPasswordArea && !passwordVisible"
             icon="eye-slash"
-            class="vk-input__password"
+            class="lyz-input__password"
             @click="togglePasswordVisible"
           />
         </span>
       </div>
       <!-- append slot -->
-      <div v-if="$slots.append" class="vk-input__append">
+      <div v-if="$slots.append" class="lyz-input__append">
         <slot name="append" />
       </div>
     </template>
@@ -79,7 +79,7 @@
         v-bind="attrs"
         ref="inputRef"
         v-model="innerValue"
-        class="vk-textarea__wrapper"
+        class="lyz-textarea__wrapper"
         :disabled="disabled"
         :readonly="readonly"
         :autocomplete="autocomplete"
