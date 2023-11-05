@@ -4,7 +4,7 @@ import Button from './Button.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Icon from '../Icon/Icon.vue'
 
-describe('Button.vue', () => { 
+describe('Button.vue', () => {
   test('basic button', () => {
     const wrapper = mount(Button, {
       props: {

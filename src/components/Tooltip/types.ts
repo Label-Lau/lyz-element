@@ -6,8 +6,8 @@ export interface TooltipProps {
   manual?: boolean
   popperOptions?: Partial<Options>
   transition?: string
-  openDelay?: number;
-  closeDelay?: number;
+  openDelay?: number
+  closeDelay?: number
 }
 
 export interface TooltipEmits {

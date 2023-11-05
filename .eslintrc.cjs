@@ -10,7 +10,8 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-recommended', // 使用 Vue3 的规则
     'eslint:recommended', // 使用 ESLint 推荐的规则
-    '@vue/eslint-config-typescript' // 使用 Vue 的 TypeScript 规则
+    '@vue/eslint-config-typescript', // 使用 Vue 的 TypeScript 规则
+    '@vue/eslint-config-prettier'
   ],
   parserOptions: {
     ecmaVersion: 'latest' // 使用最新的 ECMAScript 版本
