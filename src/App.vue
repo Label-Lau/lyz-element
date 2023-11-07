@@ -35,7 +35,7 @@ const inlineConsole = (...args: any) => {
   console.log(...args)
 }
 onMounted(() => {
-  const instance = createMessage({ message: 'hello world' })
+  // const instance = createMessage({ message: 'hello world' })
   createMessage({ message: 'hello world again', duration: 0 })
   createMessage({ message: 'hello world three', duration: 0 })
   // createMessage({ message: 'hello world three', duration: 0 })

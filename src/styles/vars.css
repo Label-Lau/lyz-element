@@ -2,21 +2,15 @@
   /* colors */
   --lyz-color-white: #ffffff;
   --lyz-color-black: #000000;
-  --colors: (
-    primary: #409eff,
-    success: #67c23a,
-    warning: #e6a23c,
-    danger: #f56c6c,
-    info: #909399
-  );
+  --colors: (primary: #409eff, success: #67c23a, warning: #e6a23c, danger: #f56c6c, info: #909399);
 
   @each $val, $color in var(--colors) {
     --lyz-color-$(val): $(color);
     @for $i from 3 to 9 by 2 {
-      --lyz-color-$(val)-light-$(i): mix(#fff, $(color), .$(i))
+      --lyz-color-$(val)-light-$(i): mix(#fff, $(color), .$(i));
     }
-    --lyz-color-$(val)-light-8: mix(#fff, $(color), .8);
-    --lyz-color-$(val)-dark-2: mix(#000, $(color), .2);
+    --lyz-color-$(val)-light-8: mix(#fff, $(color), 0.8);
+    --lyz-color-$(val)-dark-2: mix(#000, $(color), 0.2);
   }
 
   --lyz-bg-color: #ffffff;
@@ -58,7 +52,8 @@
   --lyz-font-size-base: 14px;
   --lyz-font-size-small: 13px;
   --lyz-font-size-extra-small: 12px;
-  --lyz-font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
+  --lyz-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
   --lyz-font-weight-primary: 500;
 
   /*disabled*/
@@ -66,7 +61,7 @@
   --lyz-disabled-text-color: var(--lyz-text-color-placeholder);
   --lyz-disabled-border-color: var(--lyz-border-color-light);
 
-    /*animation*/
-    --lyz-transition-duration: .3s;
-    --lyz-transition-duration-fast: .2s;
+  /*animation*/
+  --lyz-transition-duration: 0.3s;
+  --lyz-transition-duration-fast: 0.2s;
 }

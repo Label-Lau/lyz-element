@@ -1,0 +1,128 @@
+.lyz-switch {
+  --lyz-switch-on-color: var(--lyz-color-primary);
+  --lyz-switch-off-color: var(--lyz-border-color);
+  --lyz-switch-on-border-color: var(--lyz-color-primary);
+  --lyz-switch-off-border-color: var(--lyz-border-color);
+}
+
+.lyz-switch {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 20px;
+  height: 32px;
+  .lyz-switch__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+    &:focus-visible {
+      & ~ .lyz-switch__core {
+        outline: 2px solid var(--lyz-switch-on-color);
+        outline-offset: 1px;
+      }
+    }
+  }
+  &.is-disabled {
+    opacity: 0.6;
+    .lyz-switch__core {
+      cursor: not-allowed;
+    }
+  }
+  &.is-checked {
+    .lyz-switch__core {
+      border-color: var(--lyz-switch-on-border-color);
+      background-color: var(--lyz-switch-on-color);
+      .lyz-switch__core-action {
+        left: calc(100% - 17px);
+      }
+      .lyz-switch__core-inner {
+        padding: 0 18px 0 4px;
+      }
+    }
+  }
+}
+.lyz-switch--large {
+  font-size: 14px;
+  line-height: 24px;
+  height: 40px;
+  .lyz-switch__core {
+    min-width: 50px;
+    height: 24px;
+    border-radius: 12px;
+    .lyz-switch__core-action {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  &.is-checked {
+    .lyz-switch__core .lyz-switch__core-action {
+      left: calc(100% - 21px);
+      color: var(--lyz-switch-on-color);
+    }
+  }
+}
+.lyz-switch--small {
+  font-size: 12px;
+  line-height: 16px;
+  height: 24px;
+  .lyz-switch__core {
+    min-width: 30px;
+    height: 16px;
+    border-radius: 8px;
+    .lyz-switch__core-action {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  &.is-checked {
+    .lyz-switch__core .lyz-switch-core-action {
+      left: calc(100% - 13px);
+      color: var(--lyz-switch-on-color);
+    }
+  }
+}
+.lyz-switch__core {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  height: 20px;
+  min-width: 40px;
+  border: 1px solid var(--lyz-switch-off-border-color);
+  outline: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: var(--lyz-switch-off-color);
+  cursor: pointer;
+  transition:
+    border-color var(--lyz-transition-duration),
+    background-color var(--lyz-transition-duration);
+  .lyz-switch__core-action {
+    position: absolute;
+    left: 1px;
+    border-radius: var(--lyz-border-radius-circle);
+    width: 16px;
+    height: 16px;
+    background-color: var(--lyz-color-white);
+    transition: all var(--lyz-transition-duration);
+  }
+  .lyz-switch__core-inner {
+    width: 100%;
+    transition: all var(--lyz-transition-duration);
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 4px 0 18px;
+    .lyz-switch__core-inner-text {
+      font-size: 12px;
+      color: var(--lyz-color-white);
+      user-select: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
