@@ -1,0 +1,77 @@
+.lyz-select {
+  --lyz-select-item-hover-bg-color: var(--lyz-fill-color-light);
+  --lyz-select-item-font-size: var(--lyz-font-size-base);
+  --lyz-select-item-font-color: var(--lyz-text-color-regular);
+  --lyz-select-item-selected-font-color: var(--lyz-color-primary);
+  --lyz-select-item-disabled-font-color: var(--lyz-text-color-placeholder);
+  --lyz-select-input-focus-border-color: var(--lyz-color-primary);
+}
+
+.lyz-select {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 32px;
+  .lyz-tooltip .lyz-tooltip__popper {
+    padding: 0;
+  }
+  .lyz-input.is-focus .lyz-input__wrapper {
+    box-shadow: 0 0 0 1px var(--lyz-select-input-focus-border-color) inset !important;
+  }
+  .lyz-input {
+    .header-angle {
+      transition: transform var(--lyz-transition-duration);
+      &.is-active {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .lyz-input__inner {
+    cursor: pointer;
+  }
+  .lyz-select__noData,
+  .lyz-select__loading {
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+    color: var(--lyz-text-color-secondary);
+    font-size: var(--lyz-select-font-size);
+  }
+  .lyz-select__menu {
+    list-style: none;
+    margin: 6px 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .lyz-select__menu-item {
+    margin: 0;
+    font-size: var(--lyz-select-item-font-size);
+    padding: 0 32px 0 20px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--lyz-select-item-font-color);
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--lyz-select-item-hover-bg-color);
+    }
+    &.is-selected {
+      color: var(--lyz-select-item-selected-font-color);
+      font-weight: 700;
+    }
+    &.is-highlighted {
+      background-color: var(--lyz-select-item-hover-bg-color);
+    }
+    &.is-disabled {
+      color: var(--lyz-select-item-disabled-font-color);
+      cursor: not-allowed;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
