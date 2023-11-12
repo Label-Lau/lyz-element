@@ -28,10 +28,10 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import type { MessageProps } from './types'
-import RenderVNode from '../Common/RenderVNode'
-import Icon from '../Icon/Icon.vue'
 import { getLastBottomOffset } from './method'
 import useEventListener from '../../hooks/useEventListener'
+import RenderVNode from '../Common/RenderVNode'
+import Icon from '../Icon/Icon.vue'
 const props = withDefaults(defineProps<MessageProps>(), {
   type: 'info',
   duration: 3000,

@@ -16,9 +16,29 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest' // 使用最新的 ECMAScript 版本
   },
+  plugins: ['import'],
   rules: {
     'vue/multi-word-component-names': 0, // 关闭 vue/multi-word-component-names 规则
-    'vue/max-attributes-per-line': 0
+    'vue/max-attributes-per-line': 0,
+    'import/order': [
+      'error',
+      {
+        groups: [['builtin', 'external'], 'internal', ['parent', 'sibling'], 'index', 'unknown'],
+        pathGroups: [
+          {
+            pattern: '../**',
+            group: 'parent',
+            position: 'after'
+          },
+          {
+            pattern: './*.scss',
+            group: 'sibling',
+            position: 'after'
+          }
+        ]
+        // 'newlines-between': 'always'
+      }
+    ]
   },
   globals: {
     defineOptions: 'readonly' // 将 defineOptions 设置为只读全局变量
