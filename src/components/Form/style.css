@@ -1,0 +1,50 @@
+.lyz-form {
+  --lyz-form-label-font-size: var(--lyz-font-size-base);
+  --lyz-form-content-font-size: var(--lyz-font-size-base);
+}
+.lyz-form-item {
+  display: flex;
+  margin-bottom: 18px;
+  .lyz-form-item__label {
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: flex-end;
+    font-size: var(--lyz-form-label-font-size);
+    color: var(--lyz-text-color-regular);
+  }
+  .lyz-form-item__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+    line-height: 32px;
+    font-size: var(--lyz-form-content-font-size);
+    min-width: 0;
+    position: relative;
+  }
+  .lyz-form-item__error-msg {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 2px;
+    color: var(--lyz-color-danger);
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+.lyz-form-item.is-error .lyz-input__wrapper {
+  box-shadow: 0 0 0 1px var(--lyz-color-danger) inset;
+}
+.lyz-form-item.is-success .lyz-input__wrapper {
+  box-shadow: 0 0 0 1px var(--lyz-color-success) inset;
+}
+.lyz-form-item.is-required > .lyz-form-item__label::before {
+  content: '*';
+  color: var(--lyz-color-danger);
+  margin-right: 4px;
+}

@@ -4,7 +4,8 @@
     :class="{
       'is-error': validateStatus.state === 'error',
       'is-success': validateStatus.state === 'success',
-      'is-loading': validateStatus.loading
+      'is-loading': validateStatus.loading,
+      'is-required': isRequired
     }"
   >
     <label class="lyz-form-item__label">
@@ -18,14 +19,20 @@
         {{ validateStatus.errorMsg }}
       </div>
     </div>
-    {{ innerValue }} - {{ itemRules }}
+    <!-- {{ innerValue }} - {{ itemRules }} -->
   </div>
 </template>
 <script setup lang="ts">
 import { inject, computed, reactive, provide, onMounted, onUnmounted } from 'vue'
 import { isNil } from 'lodash-es'
 import Schema from 'async-validator'
-import type { FormItemProps, FormValidateFailure, FormItemContext } from './types'
+import type {
+  FormItemProps,
+  FormValidateFailure,
+  FormItemContext,
+  ValidateStatusProp,
+  FormItemInstance
+} from './types'
 import { formContextKey, formItemContextKey } from './types'
 defineOptions({
   name: 'LyzFormItem'
@@ -34,12 +41,13 @@ const props = defineProps<FormItemProps>()
 
 const formContext = inject(formContextKey)
 
-const validateStatus = reactive({
+const validateStatus: ValidateStatusProp = reactive({
   state: 'init',
   errorMsg: '',
   loading: false
 })
 
+let initialValue: any = null
 // 拿到表单对应的值
 const innerValue = computed(() => {
   const model = formContext?.model
@@ -60,6 +68,20 @@ const itemRules = computed(() => {
   }
 })
 
+const clearValidate = () => {
+  validateStatus.state = 'init'
+  validateStatus.errorMsg = ''
+  validateStatus.loading = false
+}
+
+const resetField = () => {
+  clearValidate()
+  const model = formContext?.model
+  if (model && props.prop && !isNil(model[props.prop])) {
+    model[props.prop] = initialValue
+  }
+}
+
 const getTriggeredRules = (trigger?: string) => {
   const rules = itemRules.value
   if (rules) {
@@ -71,7 +93,10 @@ const getTriggeredRules = (trigger?: string) => {
     return []
   }
 }
-const validate = (trigger?: string) => {
+const isRequired = computed(() => {
+  return itemRules.value.some((rule) => rule.required)
+})
+const validate = async (trigger?: string) => {
   const modelName = props.prop
   const triggeredRules = getTriggeredRules(trigger)
   if (!triggeredRules.length) return true
@@ -80,7 +105,7 @@ const validate = (trigger?: string) => {
       [modelName]: triggeredRules
     })
     validateStatus.loading = true
-    validator
+    return validator
       .validate({ [modelName]: innerValue.value })
       .then(() => {
         validateStatus.state = 'success'
@@ -91,6 +116,7 @@ const validate = (trigger?: string) => {
         // validateStatus.errorMsg = errors && errors.length ? errors[0].message || '' : ''
         validateStatus.errorMsg = errors?.[0]?.message || ''
         console.log(e.errors)
+        return Promise.reject(e)
       })
       .finally(() => {
         validateStatus.loading = false
@@ -99,15 +125,25 @@ const validate = (trigger?: string) => {
 }
 const context: FormItemContext = {
   validate,
-  prop: props.prop || ''
+  prop: props.prop || '',
+  clearValidate,
+  resetField
 }
 provide(formItemContextKey, context)
 onMounted(() => {
   if (props.prop) {
     formContext?.addField(context)
+    initialValue = innerValue.value
   }
 })
 onUnmounted(() => {
   formContext?.removeField(context)
+})
+
+defineExpose<FormItemInstance>({
+  validateStatus,
+  validate,
+  resetField,
+  clearValidate
 })
 </script>

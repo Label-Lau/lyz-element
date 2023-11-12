@@ -6,7 +6,14 @@
 </template>
 <script setup lang="ts">
 import { provide } from 'vue'
-import type { FormProps, FormItemContext, FormContext } from './types'
+import type { ValidateFieldsError } from 'async-validator'
+import type {
+  FormProps,
+  FormItemContext,
+  FormContext,
+  FormValidateFailure,
+  FormInstance
+} from './types'
 import { formContextKey } from './types'
 
 const props = defineProps<FormProps>()
@@ -23,12 +30,40 @@ const removeField: FormContext['removeField'] = (field) => {
     fields.splice(fields.indexOf(field), 1)
   }
 }
-const validate = () => {
-  console.log('fields', fields)
+
+const resetFields = (keys: string[] = []) => {
+  const filterArr = keys.length > 0 ? fields.filter((item) => keys.includes(item.prop)) : fields
+  filterArr.forEach((field) => field.resetField())
+}
+const clearValidate = (keys: string[] = []) => {
+  const filterArr = keys.length > 0 ? fields.filter((item) => keys.includes(item.prop)) : fields
+  filterArr.forEach((field) => field.clearValidate())
+}
+const validate = async () => {
+  let validationErrors: ValidateFieldsError = {}
+  for (const field of fields) {
+    try {
+      await field.validate()
+    } catch (e) {
+      const error = e as FormValidateFailure
+      validationErrors = {
+        ...validationErrors,
+        ...error.fields
+      }
+    }
+  }
+  if (Object.keys(validationErrors).length === 0) return true
+  return Promise.reject(validationErrors)
 }
 provide(formContextKey, {
   ...props,
   addField,
   removeField
+})
+
+defineExpose<FormInstance>({
+  validate,
+  resetFields,
+  clearValidate
 })
 </script>
